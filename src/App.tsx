@@ -1,10 +1,17 @@
-import React from 'react';
+import { useState, createContext, useContext } from "react";
+import Authentication from "./components/Authentication";
 import './App.css';
 
+
+
 function App() {
+
+  const [accessToken, setAccessToken] = useState(null);
+
+  Authentication(accessToken, setAccessToken);
+
   return (
     <div className="App">
-      <p>{`${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`}</p>
     </div>
   );
 }
