@@ -4,10 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-route
 import './App.css';
 import Home from "./components/Home";
 
-
-
 function App() {
-
 
   return (
     <BrowserRouter>
@@ -15,7 +12,6 @@ function App() {
         <Route path='/' element={<Home />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 
