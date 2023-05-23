@@ -1,7 +1,7 @@
 import { useState, createContext, useContext } from "react";
 import axios from "axios";
 
-export default function Authentication(accessToken, setAccessToken) {
+export default function Authentication(setAccessToken, setExpiresIn, setTokenRefresh) {
 
   let clientID = process.env.REACT_APP_SPOTIFY_CLIENT_ID ?? 'ERROR';
   let clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET ?? 'ERROR';
@@ -9,7 +9,7 @@ export default function Authentication(accessToken, setAccessToken) {
 
   const queryString = require('query-string');
 
-  if (accessToken == null) {
+
     axios.post('https://accounts.spotify.com/api/token', queryString.stringify({ 'grant_type': 'client_credentials' }), {
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
@@ -23,12 +23,14 @@ export default function Authentication(accessToken, setAccessToken) {
       .then((res) => {
         console.log(res);
           setAccessToken(res.data.access_token);
+          setExpiresIn(res.data.expires_in);
+          setTokenRefresh(true);
       })
       .catch((err) => {
         console.log(err)
       })
 
     return;
-  }
+  
 }
 
