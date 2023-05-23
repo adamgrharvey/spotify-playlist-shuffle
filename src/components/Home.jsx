@@ -35,6 +35,9 @@ export default function Home(props) {
     }
   })
 
+  useEffect(() => {
+    console.log('userAuth:',  userAuth);
+  }, [userAuth])
 
 
   useEffect(() => {
@@ -46,8 +49,7 @@ export default function Home(props) {
         'expires_in': userHash[2].split('=')[1],
       });
       navigate("/");
-
-
+      
     }
   });
 
