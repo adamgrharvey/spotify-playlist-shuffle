@@ -1,6 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import Authentication from "./Authentication";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
 
 export default function Home(props) {
 
@@ -10,6 +11,8 @@ export default function Home(props) {
   const [expiresIn, setExpiresIn] = useState(0);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
+
+  const [userPlaylists, setUserPlaylists] = useState([]);
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // insert your client id here from spotify
   const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -36,7 +39,7 @@ export default function Home(props) {
   })
 
   useEffect(() => {
-    console.log('userAuth:',  userAuth);
+    console.log('userAuth:', userAuth);
   }, [userAuth])
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function Home(props) {
         'expires_in': userHash[2].split('=')[1],
       });
       navigate("/");
-      
+
     }
   });
 
@@ -60,7 +63,18 @@ export default function Home(props) {
     <>
       <div className="App">
         <h1>hi</h1>
-        <button onClick={handleLogin}>login to spotify</button>
+        {userAuth.access_token ? <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, "")}>get playlists</button> :
+          <button onClick={handleLogin}>login to spotify</button>}
+        <div>
+          {userPlaylists.items &&
+            <div>
+              {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>previous</button>}
+              {userPlaylists.next != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>next</button>}
+            </div>}
+        </div>
+        <div>
+          {userPlaylists.items && userPlaylists.items.map((playlist) => <div>{playlist.name}</div>)}
+        </div>
       </div>
     </>
   )
