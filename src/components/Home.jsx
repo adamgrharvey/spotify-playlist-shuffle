@@ -2,6 +2,7 @@ import { useState, createContext, useContext, useEffect } from "react";
 import Authentication from "./Authentication";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
+import getPlaylistData from "./helpers/getPlaylistData";
 
 export default function Home(props) {
 
@@ -11,8 +12,8 @@ export default function Home(props) {
   const [expiresIn, setExpiresIn] = useState(0);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
-
   const [userPlaylists, setUserPlaylists] = useState([]);
+  const [currPlaylist, setCurrPlaylist] = useState(null);
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // insert your client id here from spotify
   const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -43,6 +44,10 @@ export default function Home(props) {
   }, [userAuth])
 
   useEffect(() => {
+    console.log(currPlaylist);
+  }, [currPlaylist])
+
+  useEffect(() => {
     if (window.location.hash) {
       let userHash = window.location.hash.substring(1).split("&");
       setUserAuth({
@@ -63,18 +68,37 @@ export default function Home(props) {
     <>
       <div className="App">
         <h1>hi</h1>
-        {userAuth.access_token ? <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, "")}>get playlists</button> :
+        {userAuth.access_token ? <button onClick={() => {
+          GetCurrUserPlaylists(userAuth, setUserPlaylists, "")
+        }}>get playlists</button> :
           <button onClick={handleLogin}>login to spotify</button>}
         <div>
-          {userPlaylists.items &&
+          {!currPlaylist && userPlaylists.items &&
             <div>
               {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>previous</button>}
               {userPlaylists.next != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>next</button>}
             </div>}
         </div>
-        <div>
-          {userPlaylists.items && userPlaylists.items.map((playlist) => <div>{playlist.name}</div>)}
-        </div>
+        {!currPlaylist ? <div>
+          {!currPlaylist && userPlaylists.items && userPlaylists.items.map((playlist, i) =>
+            <div key={i}>
+              {playlist.images[0] &&
+                <img width={42} height={42} src={playlist.images[0].url} alt="image"></img>}
+              {playlist.name}
+              <button onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id) }}>select</button>
+            </div>)}
+        </div> : <div>
+          <button onClick={() => {
+            setCurrPlaylist(null);
+          }}>back</button>
+          {currPlaylist.name}
+          {currPlaylist && currPlaylist.tracks.items.map((track, i) => 
+          <div key={`track${1}`}>
+            {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
+            {`${track.track.name} by ${track.track.artists[0].name}`}
+          </div>)}
+        </div>}
+
       </div>
     </>
   )

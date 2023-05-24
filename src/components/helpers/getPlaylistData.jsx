@@ -1,27 +1,16 @@
 import axios from "axios";
 
-export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page) {
-
-
-  /*
-
-    userState = {
-      access_token = ...
-      token_type: Bearer
-      expires_in: ...
-    }
-
-  */
+export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId) {
 
   return new Promise((resolve, reject) => {
-    axios.get(`https://api.spotify.com/v1/me/playlists${page}`, {
+    axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
       headers: {
         Authorization: `${userAuth.token_type} ${userAuth.access_token}`
       },
     })
       .then((res) => {
         console.log(res.data);
-        setUserPlaylists(res.data);
+        setCurrPlaylist(res.data);
         resolve(res.data);
       })
       .catch((err) => {
