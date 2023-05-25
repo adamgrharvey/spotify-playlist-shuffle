@@ -3,6 +3,7 @@ import Authentication from "./Authentication";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
 import getPlaylistData from "./helpers/getPlaylistData";
+import getPlaylistTracks from "./helpers/getPlaylistTracks";
 
 export default function Home(props) {
 
@@ -13,7 +14,13 @@ export default function Home(props) {
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const [currPlaylist, setCurrPlaylist] = useState(null);
+  const [currPlaylist, setCurrPlaylist] = useState({
+    data: {},
+    tracks: [],
+    next: null,
+    end: false
+    
+  });
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // insert your client id here from spotify
   const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -44,7 +51,10 @@ export default function Home(props) {
   }, [userAuth])
 
   useEffect(() => {
-    console.log(currPlaylist);
+    if (currPlaylist.next !== null) {
+      getPlaylistTracks(userAuth, setCurrPlaylist, currPlaylist.data.id, currPlaylist.next)
+    }
+
   }, [currPlaylist])
 
   useEffect(() => {
@@ -73,14 +83,14 @@ export default function Home(props) {
         }}>get playlists</button> :
           <button onClick={handleLogin}>login to spotify</button>}
         <div>
-          {!currPlaylist && userPlaylists.items &&
+          {!currPlaylist.data.id && userPlaylists.items &&
             <div>
               {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>previous</button>}
               {userPlaylists.next != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>next</button>}
             </div>}
         </div>
-        {!currPlaylist ? <div>
-          {!currPlaylist && userPlaylists.items && userPlaylists.items.map((playlist, i) =>
+        {!currPlaylist.data.id ? <div>
+          {!currPlaylist.data.id && userPlaylists.items && userPlaylists.items.map((playlist, i) =>
             <div key={i}>
               {playlist.images[0] &&
                 <img width={42} height={42} src={playlist.images[0].url} alt="image"></img>}
@@ -92,11 +102,11 @@ export default function Home(props) {
             setCurrPlaylist(null);
           }}>back</button>
           {currPlaylist.name}
-          {currPlaylist && currPlaylist.tracks.items.map((track, i) => 
-          <div key={`track${1}`}>
-            {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
-            {`${track.track.name} by ${track.track.artists[0].name}`}
-          </div>)}
+          {(currPlaylist.next === null && currPlaylist.end) && currPlaylist.tracks.map((track, i) =>
+            <div key={`track${i}`}>
+              {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
+              {`${track.track.name} by ${track.track.artists[0].name}`}
+            </div>)}
         </div>}
 
       </div>

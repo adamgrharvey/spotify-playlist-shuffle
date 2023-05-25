@@ -10,7 +10,12 @@ export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId) {
     })
       .then((res) => {
         console.log(res.data);
-        setCurrPlaylist(res.data);
+        setCurrPlaylist((prev) => ({
+          ...prev,
+          data: res.data,
+          tracks: [...prev.tracks, ...res.data.tracks.items],
+          next: res.data.tracks.next
+        }));
         resolve(res.data);
       })
       .catch((err) => {
