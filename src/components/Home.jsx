@@ -19,7 +19,7 @@ export default function Home(props) {
     tracks: [],
     next: null,
     end: false
-    
+
   });
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // insert your client id here from spotify
@@ -99,14 +99,22 @@ export default function Home(props) {
             </div>)}
         </div> : <div>
           <button onClick={() => {
-            setCurrPlaylist(null);
+            setCurrPlaylist({
+              data: {},
+              tracks: [],
+              next: null,
+              end: false
+
+            });
           }}>back</button>
-          {currPlaylist.name}
-          {(currPlaylist.next === null && currPlaylist.end) && currPlaylist.tracks.map((track, i) =>
-            <div key={`track${i}`}>
-              {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
-              {`${track.track.name} by ${track.track.artists[0].name}`}
-            </div>)}
+          <div>
+            {currPlaylist.data.name}
+            {(currPlaylist.next === null) && currPlaylist.tracks.map((track, i) =>
+              <div key={`track${i}`}>
+                {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
+                {`${track.track.name} by ${track.track.artists[0].name}`}
+              </div>)}
+          </div>
         </div>}
 
       </div>
