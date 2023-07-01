@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-route
 import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
 import getPlaylistData from "./helpers/getPlaylistData";
 import getPlaylistTracks from "./helpers/getPlaylistTracks";
+import GetCurrUser from "./helpers/getCurrUser";
 
 export default function Home(props) {
 
@@ -13,6 +14,7 @@ export default function Home(props) {
   const [expiresIn, setExpiresIn] = useState(0);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
+  const [currUser, setCurrUser] = useState({});
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [currPlaylist, setCurrPlaylist] = useState({
     data: {},
@@ -48,6 +50,9 @@ export default function Home(props) {
 
   useEffect(() => {
     console.log('userAuth:', userAuth);
+    if (userAuth.access_token) {
+      GetCurrUser(userAuth, setCurrUser);
+    }
   }, [userAuth])
 
   useEffect(() => {
@@ -66,7 +71,7 @@ export default function Home(props) {
         'expires_in': userHash[2].split('=')[1],
       });
       navigate("/");
-
+      
     }
   });
 
@@ -77,25 +82,26 @@ export default function Home(props) {
   return (
     <>
       <div className="App">
-        <h1>hi</h1>
+        <h1>Spotify Playlist Scrambler</h1>
         {userAuth.access_token ? <button onClick={() => {
-          GetCurrUserPlaylists(userAuth, setUserPlaylists, "")
-        }}>get playlists</button> :
-          <button onClick={handleLogin}>login to spotify</button>}
+          GetCurrUserPlaylists(userAuth, setUserPlaylists, "", currUser)
+        }}>Get playlists</button> :
+          <button onClick={handleLogin}>Login to Spotify</button>}
         <div>
           {!currPlaylist.data.id && userPlaylists.items &&
             <div>
-              {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>previous</button>}
-              {userPlaylists.next != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>next</button>}
+              {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>Previous</button>}
+              {userPlaylists.next != null && <button className="" onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>Next</button>}
             </div>}
         </div>
-        {!currPlaylist.data.id ? <div>
+        {!currPlaylist.data.id ? <div className="list">
           {!currPlaylist.data.id && userPlaylists.items && userPlaylists.items.map((playlist, i) =>
-            <div key={i}>
+
+            <div className="playlistDiv" key={i}>
               {playlist.images[0] &&
                 <img width={42} height={42} src={playlist.images[0].url} alt="image"></img>}
-              {playlist.name}
-              <button onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id) }}>select</button>
+              <div className="playlistText" >{playlist.name}</div>
+              <button className="playlistSelect" onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id) }}>Select</button>
             </div>)}
         </div> : <div>
           <button onClick={() => {
@@ -106,7 +112,7 @@ export default function Home(props) {
               end: false
 
             });
-          }}>back</button>
+          }}>Back</button>
           <div>
             {currPlaylist.data.name}
             {(currPlaylist.next === null) && currPlaylist.tracks.map((track, i) =>

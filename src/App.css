@@ -7,6 +7,27 @@
   pointer-events: none;
 }
 
+.playlistDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.list {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  left: 25%;
+  width: 50%;
+}
+
+.playlistSelect {
+  margin-left: 5px;
+}
+
+.playlistText {
+
+  margin-left: 5px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

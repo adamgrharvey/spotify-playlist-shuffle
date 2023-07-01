@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page) {
+export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page, currUser) {
 
-
+  let id = currUser.id;
   /*
 
     userState = {
@@ -20,9 +20,20 @@ export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page) {
       },
     })
       .then((res) => {
-        console.log(res.data);
-        setUserPlaylists(res.data);
-        resolve(res.data);
+        let data = res.data;
+        for (let i = 0; i < data.items.length; i++) {
+          console.log(data.items[i].name);
+          if (id !== data.items[i].owner.id) {
+            data.items.splice(i, 1);
+            i = -1;
+          }
+        }
+        data.total = data.items.length;
+        if (data.total < 21) {
+          data.next = null;
+        }
+        setUserPlaylists(data);
+        resolve(data);
       })
       .catch((err) => {
         console.log(err)
