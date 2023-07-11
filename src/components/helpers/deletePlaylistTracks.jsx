@@ -1,6 +1,7 @@
 import axios from "axios";
+import submitPlaylistTracks from "./submitPlaylistTracks";
 
-export default function setPlaylistTracks(userAuth, currUser, currPlaylist) {
+export default function deletePlaylistTracks(userAuth, currUser, currPlaylist) {
 
   let id = currUser.id;
   let tracks = [];
@@ -8,6 +9,7 @@ export default function setPlaylistTracks(userAuth, currUser, currPlaylist) {
   for (let i = 0; i < currPlaylist.tracks.length; i++) {
     tracks.push({ 'uri': currPlaylist.tracks[i].track.uri })
   }
+
   /*
 
     userState = {
@@ -33,12 +35,11 @@ export default function setPlaylistTracks(userAuth, currUser, currPlaylist) {
     })
       .then((res) => {
         console.log(res);
-        resolve(res);
+        submitPlaylistTracks(userAuth, currUser, currPlaylist);
       })
       .catch((err) => {
         console.log(err)
         reject(err);
       })
   })
-
 }

@@ -7,7 +7,7 @@ import getPlaylistTracks from "./helpers/getPlaylistTracks";
 import GetCurrUser from "./helpers/getCurrUser";
 import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
-import setPlaylistTracks from "./helpers/setPlaylistTracks";
+import deletePlaylistTracks from "./helpers/deletePlaylistTracks";
 
 export default function Home(props) {
 
@@ -123,7 +123,18 @@ export default function Home(props) {
           <div>
           <button onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>reset</button>
             <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>shuffle</button>
-            <button onClick={() => setPlaylistTracks(userAuth, currUser, currPlaylist)}>save</button>
+            <button onClick={() => {
+              deletePlaylistTracks(userAuth, currUser, currPlaylist)
+              setCurrPlaylist({
+                data: {},
+                tracks: [],
+                shuffleTracks: [],
+                next: null,
+                end: false
+            
+              })
+              getPlaylistTracks(userAuth, setCurrPlaylist, currPlaylist.data.id, null)
+              }}>save</button>
             <div>{currPlaylist.data.name}</div>
             {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
               <div key={`track${i}`}>
