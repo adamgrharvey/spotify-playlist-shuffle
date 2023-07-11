@@ -19,6 +19,9 @@ export default function Authentication(setAccessToken, setExpiresIn, setTokenRef
         username: clientID,
         password: clientSecret
       },
+      data: {
+        "scope": "playlist-modify-private playlist-modify-public"
+      }
     })
       .then((res) => {
         console.log(res);

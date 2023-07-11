@@ -22,7 +22,6 @@ export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page, c
       .then((res) => {
         let data = res.data;
         for (let i = 0; i < data.items.length; i++) {
-          console.log(data.items[i].name);
           if (id !== data.items[i].owner.id) {
             data.items.splice(i, 1);
             i = -1;

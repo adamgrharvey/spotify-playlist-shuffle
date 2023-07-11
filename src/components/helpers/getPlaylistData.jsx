@@ -14,6 +14,7 @@ export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId) {
           ...prev,
           data: res.data,
           tracks: [...prev.tracks, ...res.data.tracks.items],
+          shuffleTracks: [...prev.shuffleTracks, ...res.data.tracks.items],
           next: res.data.tracks.next
         }));
         resolve(res.data);

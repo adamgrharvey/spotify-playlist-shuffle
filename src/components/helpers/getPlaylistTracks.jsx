@@ -20,6 +20,7 @@ export default function getPlaylistTracks(userAuth, setCurrPlaylist, playlistId,
           setCurrPlaylist((prev) => ({
             ...prev,
             tracks: [...prev.tracks, ...res.data.items],
+            shuffleTracks: [...prev.shuffleTracks, ...res.data.items],
             next: res.data.next,
             end: true
           }));

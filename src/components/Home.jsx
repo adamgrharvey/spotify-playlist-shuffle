@@ -5,6 +5,9 @@ import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
 import getPlaylistData from "./helpers/getPlaylistData";
 import getPlaylistTracks from "./helpers/getPlaylistTracks";
 import GetCurrUser from "./helpers/getCurrUser";
+import shuffleTracks from "./helpers/shuffleTracks";
+import resetTracks from "./helpers/resetTracks";
+import setPlaylistTracks from "./helpers/setPlaylistTracks";
 
 export default function Home(props) {
 
@@ -19,6 +22,7 @@ export default function Home(props) {
   const [currPlaylist, setCurrPlaylist] = useState({
     data: {},
     tracks: [],
+    shuffleTracks: [],
     next: null,
     end: false
 
@@ -32,6 +36,8 @@ export default function Home(props) {
     "user-read-currently-playing",
     "user-read-playback-state",
     "playlist-read-private",
+    "playlist-modify-private",
+    "playlist-modify-public"
   ];
   const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 
@@ -71,7 +77,7 @@ export default function Home(props) {
         'expires_in': userHash[2].split('=')[1],
       });
       navigate("/");
-      
+
     }
   });
 
@@ -108,14 +114,18 @@ export default function Home(props) {
             setCurrPlaylist({
               data: {},
               tracks: [],
+              shuffleTracks: [],
               next: null,
               end: false
 
             });
           }}>Back</button>
           <div>
-            {currPlaylist.data.name}
-            {(currPlaylist.next === null) && currPlaylist.tracks.map((track, i) =>
+          <button onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>reset</button>
+            <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>shuffle</button>
+            <button onClick={() => setPlaylistTracks(userAuth, currUser, currPlaylist)}>save</button>
+            <div>{currPlaylist.data.name}</div>
+            {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
               <div key={`track${i}`}>
                 {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
                 {`${track.track.name} by ${track.track.artists[0].name}`}
