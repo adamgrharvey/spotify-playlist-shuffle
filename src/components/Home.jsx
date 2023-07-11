@@ -131,9 +131,7 @@ export default function Home(props) {
                 shuffleTracks: [],
                 next: null,
                 end: false
-            
               })
-              getPlaylistTracks(userAuth, setCurrPlaylist, currPlaylist.data.id, null)
               }}>save</button>
             <div>{currPlaylist.data.name}</div>
             {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
