@@ -11,6 +11,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+.TrackList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .list {
   display: flex;
   position: relative;
@@ -53,6 +60,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

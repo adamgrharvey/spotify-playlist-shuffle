@@ -9,6 +9,7 @@ import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
 import deletePlaylistTracks from "./helpers/deletePlaylistTracks";
 import submitPlaylistTracks from "./helpers/submitPlaylistTracks";
+import Track from "./Track";
 
 export default function Home(props) {
 
@@ -130,11 +131,10 @@ export default function Home(props) {
             }}>save</button> : <div />}
 
             <div>{currPlaylist.data.name}</div>
-            {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
-              <div key={`track${i}`}>
-                {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
-                {`${track.track.name} by ${track.track.artists[0].name}`}
-              </div>)}
+            <div className="TrackList" role="grid" tabIndex="0" aria-rowcount={`${currPlaylist.shuffleTracks.length}`}>
+              {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
+                <Track index={i} key={i + 1} track={track} />)}
+            </div>
           </div>
         </div>}
 
