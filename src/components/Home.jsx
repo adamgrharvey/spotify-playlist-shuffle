@@ -8,6 +8,7 @@ import GetCurrUser from "./helpers/getCurrUser";
 import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
 import deletePlaylistTracks from "./helpers/deletePlaylistTracks";
+import submitPlaylistTracks from "./helpers/submitPlaylistTracks";
 
 export default function Home(props) {
 
@@ -33,8 +34,6 @@ export default function Home(props) {
   const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
   const SPACE_DELIMITER = "%20";
   const SCOPES = [
-    "user-read-currently-playing",
-    "user-read-playback-state",
     "playlist-read-private",
     "playlist-modify-private",
     "playlist-modify-public"
@@ -107,7 +106,7 @@ export default function Home(props) {
               {playlist.images[0] &&
                 <img width={42} height={42} src={playlist.images[0].url} alt="image"></img>}
               <div className="playlistText" >{playlist.name}</div>
-              <button className="playlistSelect" onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id) }}>Select</button>
+              <button className="playlistSelect" onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id, false) }}>Select</button>
             </div>)}
         </div> : <div>
           <button onClick={() => {
@@ -121,18 +120,16 @@ export default function Home(props) {
             });
           }}>Back</button>
           <div>
-          <button onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>reset</button>
+            <button onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>reset</button>
             <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>shuffle</button>
-            <button onClick={() => {
-              deletePlaylistTracks(userAuth, currUser, currPlaylist)
-              setCurrPlaylist({
-                data: {},
-                tracks: [],
-                shuffleTracks: [],
-                next: null,
-                end: false
-              })
-              }}>save</button>
+            {JSON.stringify(currPlaylist.tracks) !== JSON.stringify(currPlaylist.shuffleTracks) ? <button onClick={async () => {
+              await deletePlaylistTracks(userAuth, currUser, currPlaylist)
+                .then(await submitPlaylistTracks(userAuth, currUser, currPlaylist))
+                .then(await getPlaylistData(userAuth, setCurrPlaylist, currPlaylist.data.id, true))
+                .then(console.log('saved'))
+
+            }}>save</button> : <div />}
+
             <div>{currPlaylist.data.name}</div>
             {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
               <div key={`track${i}`}>

@@ -1,6 +1,16 @@
 import axios from "axios";
 
-export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId) {
+export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId, clearPrev) {
+
+  if (clearPrev) {
+    setCurrPlaylist({
+      data: {},
+      tracks: [],
+      shuffleTracks: [],
+      next: null,
+      end: false
+    });
+  }
 
   return new Promise((resolve, reject) => {
     axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
@@ -17,6 +27,7 @@ export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId) {
           shuffleTracks: [...prev.shuffleTracks, ...res.data.tracks.items],
           next: res.data.tracks.next
         }));
+        console.log('get playlist done');
         resolve(res.data);
       })
       .catch((err) => {
