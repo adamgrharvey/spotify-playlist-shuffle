@@ -126,7 +126,6 @@ export default function Home(props) {
               await deletePlaylistTracks(userAuth, currUser, currPlaylist)
                 .then(await submitPlaylistTracks(userAuth, currUser, currPlaylist))
                 .then(await getPlaylistData(userAuth, setCurrPlaylist, currPlaylist.data.id, true))
-                .then(console.log('saved'))
 
             }}>save</button> : <div />}
 

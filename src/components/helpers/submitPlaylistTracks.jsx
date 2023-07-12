@@ -25,8 +25,6 @@ export default function submitPlaylistTracks(userAuth, currUser, currPlaylist) {
   return new Promise((resolve, reject) => {
     axios({ method: 'post', url: `https://api.spotify.com/v1/playlists/${currPlaylist.data.id}/tracks`, data: data, headers: headers })
       .then((res) => {
-        console.log(res);
-        console.log('submit done');
         resolve(res);
       })
       .catch((err) => {

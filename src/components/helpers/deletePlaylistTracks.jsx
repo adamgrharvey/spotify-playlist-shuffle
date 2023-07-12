@@ -29,8 +29,6 @@ export default function deletePlaylistTracks(userAuth, currUser, currPlaylist) {
       }
     })
       .then((res) => {
-        console.log(res);
-        console.log('delete done');
         resolve(res);
       })
       .catch((err) => {

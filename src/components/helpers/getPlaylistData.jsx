@@ -19,7 +19,6 @@ export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId, c
       },
     })
       .then((res) => {
-        console.log(res.data);
         setCurrPlaylist((prev) => ({
           ...prev,
           data: res.data,
@@ -27,7 +26,6 @@ export default function getPlaylistData(userAuth, setCurrPlaylist, playlistId, c
           shuffleTracks: [...prev.shuffleTracks, ...res.data.tracks.items],
           next: res.data.tracks.next
         }));
-        console.log('get playlist done');
         resolve(res.data);
       })
       .catch((err) => {
