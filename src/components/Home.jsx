@@ -131,10 +131,17 @@ export default function Home(props) {
             }}>save</button> : <div />}
 
             <div>{currPlaylist.data.name}</div>
-            <div className="TrackList" role="grid" tabIndex="0" aria-rowcount={`${currPlaylist.shuffleTracks.length}`}>
+            <table id="PlaylistTable">
+              <tr>
+                <th className="LabelTrackNumber">#</th>
+                <th id="LabelTitle">Title</th>
+                <th id="LabelAlbum">Album</th>
+                <th id="LabelDateAdded">Date added</th>
+                <th id="LabelDuration">🕒</th>
+              </tr>
               {(currPlaylist.next === null) && currPlaylist.shuffleTracks.map((track, i) =>
                 <Track index={i} key={i + 1} track={track} />)}
-            </div>
+            </table>
           </div>
         </div>}
 

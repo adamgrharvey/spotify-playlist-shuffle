@@ -1,12 +1,67 @@
 .Track {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.standalone-ellipsis-one-line {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: unset;
+  word-break: break-all;
 }
 
 .imgTitle {
   display: flex;
   flex-direction: row;
+}
+
+.TitleArtist {
+  display: flex;
+  flex-direction: column;
+}
+
+#PlaylistTable {
+  text-align: left;
+  max-width: 80%;
+}
+
+.duration {
+  text-align: right;
+  max-width: 5%;
+}
+
+.LabelTrackNumber {
+  text-align: center;
+  padding-right: 12px;
+  padding-left: 12px;
+  font-weight: normal;
+}
+
+#LabelTitle {
+  width: 45%;
+  font-weight: normal;
+}
+
+#Title {
+  font-weight: bold;
+}
+
+#LabelAlbum {
+  width: 25%;
+  font-weight: normal;
+}
+
+#LabelDateAdded {
+  width: 25%;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+#LabelDuration {
+  text-align: right;
+  width: 5%;
+  font-weight: normal;
 }
