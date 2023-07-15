@@ -1,6 +1,109 @@
+.PlaylistTitleImage {
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.PlaylistTitleLarge {
+
+
+}
+.PlaylistTitleLarge-under12char {
+  margin: 0.08em 0px 0.12em;
+  visibility: visible;
+  width: 100%;
+  color: #fff;
+  font-family: var(--font-family, CircularSpTitle, CircularSpTitle-Tall, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, var(--fallback-fonts, sans-serif));
+  font-weight: 900;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  margin-block: 0px;
+  margin-left: 20px;
+  font-size: 3.8rem;
+}
+.PlaylistTitleLarge-over11char {
+  margin: 0.08em 0px 0.12em;
+  visibility: visible;
+  width: 100%;
+  color: #fff;
+  font-family: var(--font-family, CircularSpTitle, CircularSpTitle-Tall, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, var(--fallback-fonts, sans-serif));
+  font-weight: 900;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  margin-block: 0px;
+  margin-left: 20px;
+  font-size: 1.8rem;
+}
+
+.ArtistSpacing {
+  grid-area: subtitle;
+  grid-column-start: badges;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+@media(min-width: 840px) {
+  .PlaylistTitleLarge-over11char {
+    font-size: 1.8rem;
+  }
+  .PlaylistTitleLarge-under12char {
+    font-size: 3.8rem;
+  }
+  .ArtistSpacing {
+    font-size: 15px;
+  }
+}
+
+@media(min-width: 1024px) {
+  .PlaylistTitleLarge-over11char {
+    font-size: 2.5rem;
+  }
+  .PlaylistTitleLarge-under12char {
+    font-size: 4.8rem;
+  }
+}
+@media(min-width: 1424px) {
+  .PlaylistTitleLarge-over11char {
+    font-size: 2.8rem;
+  }
+  .PlaylistTitleLarge-under12char {
+    font-size: 5.5rem;
+  }
+}
+
+.PlaylistOwner {
+  font-weight: 700;
+  color: #FFF;
+}
+
+.PlaylistDesc {
+  margin-top: 20px;
+  margin-left: 25px;
+}
+
+.PlaylistDetails {
+  padding-top: 8px;
+  margin-left: 25px;
+  font-weight: 400;
+  color: #FFF;
+}
+
+.PlaylistDuration {
+  color: #b3b3b3
+}
+
+.DotSpace {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+
 
 .TitleArtist {
-  padding-left: 5px;
+  padding-left: 15px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -11,7 +114,8 @@
 }
 
 
-.ellipsis-one-line,.standalone-ellipsis-one-line {
+.ellipsis-one-line,
+.standalone-ellipsis-one-line {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap
@@ -26,7 +130,7 @@
 }
 
 html {
-  scrollbar-color: hsla(0,0%,100%,.3) transparent;
+  scrollbar-color: hsla(0, 0%, 100%, .3) transparent;
   scrollbar-width: auto
 }
 
@@ -35,7 +139,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsla(0,0%,100%,.3)
+  background-color: hsla(0, 0%, 100%, .3)
 }
 
 html {
@@ -43,7 +147,8 @@ html {
   height: 100%
 }
 
-body,input {
+body,
+input {
   color: #b3b3b3;
   text-transform: none
 }
@@ -78,7 +183,7 @@ body {
 
 
 .PlaylistGrid[aria-colcount="2"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [last] minmax(120px,1fr)
+  grid-template-columns: [first] 4fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid[aria-colcount="2"]:not(.WidthToggle) .GridWidthScaling {
@@ -86,7 +191,7 @@ body {
 }
 
 .PlaylistGrid[aria-colcount="3"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [last] minmax(120px,1fr)
+  grid-template-columns: [first] 4fr [var1] 2fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid[aria-colcount="3"]:not(.WidthToggle) .GridWidthScaling~.GridWidthScaling {
@@ -94,7 +199,7 @@ body {
 }
 
 .PlaylistGrid[aria-colcount="4"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [last] minmax(120px,1fr)
+  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid[aria-colcount="4"]:not(.WidthToggle) .GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
@@ -102,11 +207,11 @@ body {
 }
 
 .PlaylistGrid[aria-colcount="5"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [var3] 2fr [last] minmax(120px,1fr)
+  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [var3] 2fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="3"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px,1fr)
+  grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="3"] .GridWidthScaling {
@@ -114,7 +219,7 @@ body {
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="4"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [last] minmax(120px,1fr)
+  grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="4"] .GridWidthScaling~.GridWidthScaling {
@@ -122,7 +227,7 @@ body {
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="5"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr)
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="5"] .GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
@@ -130,14 +235,14 @@ body {
 }
 
 
-@media(width <= 1200px) {
+@media(width <=1200px) {
   .Wn5NpEuR1Qw99DelnfxX .GridSizing {
-      grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [var2] 4fr [last] minmax(120px,4fr)
+    grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [var2] 4fr [last] minmax(120px, 4fr)
   }
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="6"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [var3] minmax(120px,2fr) [last] minmax(120px,1fr)
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [var3] minmax(120px, 2fr) [last] minmax(120px, 1fr)
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="6"] .GridWidthScaling~.GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
@@ -145,7 +250,7 @@ body {
 }
 
 .PlaylistGrid.WidthToggle[aria-colcount="7"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 3fr [var2] 3fr [var3] 2fr [var4] 2fr [last] minmax(120px,1fr)
+  grid-template-columns: [index] 16px [first] 6fr [var1] 3fr [var2] 3fr [var3] 2fr [var4] 2fr [last] minmax(120px, 1fr)
 }
 
 .GridSizing {
@@ -155,8 +260,10 @@ body {
 }
 
 .PlaylistTrackTitle {
+  padding-bottom: 4px;
   color: #fff
 }
+
 .HeaderStyle {
   border-bottom: 1px solid transparent;
   -webkit-box-sizing: content-box;
@@ -171,13 +278,13 @@ body {
 
 @media(min-width: 1024px) {
   .HeaderStyle {
-      margin:0 -24px 16px;
-      padding: 0 24px
+    margin: 0 -24px 16px;
+    padding: 0 24px
   }
 }
 
 .PlaylistHeader {
-  border-bottom: 1px solid hsla(0,0%,100%,.1);
+  border-bottom: 1px solid hsla(0, 0%, 100%, .1);
   color: #b3b3b3;
   height: 36px
 }
@@ -210,7 +317,8 @@ body {
   justify-self: end;
 }
 
-.PlaylistIndexSpacing,.PlaylistTitle {
+.PlaylistIndexSpacing,
+.PlaylistTitle {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -246,14 +354,12 @@ body {
 }
 
 
-.ArtistSpacing {
-  grid-area: subtitle;
-  grid-column-start: badges
-}
 
 
 
-.GridWidthScaling a,.ArtistSpacing a {
+
+.GridWidthScaling a,
+.ArtistSpacing a {
   color: #b3b3b3
 }
 

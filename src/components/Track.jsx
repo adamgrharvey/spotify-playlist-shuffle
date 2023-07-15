@@ -18,7 +18,16 @@ export default function Track(props) {
           </div>
         </div>
         <div className="PlaylistTitle" role="gridcell" aria-colindex="2" tabIndex="-1">
-          {track.track.album.images && <img aria-hidden="false" loading='eager' width={40} height={40} src={track.track.album.images[0].url} alt="image"></img>}
+          {track.track.is_local ?
+            <div>
+              <img aria-hidden="false" loading='eager' width={40} height={40} src={`https://media.wnyc.org/i/320/320/l/80/1/blackbox.jpeg`} alt="image"></img>
+            </div>
+            :
+            <div>
+              {track.track.album.images && <img aria-hidden="false" loading='eager' width={40} height={40} src={track.track.album.images[0].url} alt="image"></img>}
+            </div>}
+
+
           <div className="TitleArtist">
             <div className="standalone-ellipsis-one-line PlaylistTrackTitle" tabIndex="-1">{track.track.name}</div>
             <div className="ArtistSpacing standalone-ellipsis-one-line">
