@@ -153,25 +153,25 @@ export default function Home(props) {
 
             
             <div className="contentSpacing">
-              <div role="grid" aria-rowcount={`${currPlaylist.tracks.length + 1}`} aria-colcount={`${AriaCol}`} aria-label={`${currPlaylist.data.name}`} className="PlaylistGrid WidthToggle" tabindex="0">
+              <div role="grid" aria-rowcount={`${currPlaylist.tracks.length + 1}`} aria-colcount={`${AriaCol}`} aria-label={`${currPlaylist.data.name}`} className="PlaylistGrid WidthToggle" tabIndex="0">
                 <div className="HeaderStyle" style={{ top: "64px" }} role="presentation">
                   <div className="PlaylistHeader GridSizing" role="row" aria-rowindex="1">
-                    <div className="PlaylistIndexSpacing" role="columnheader" aria-colindex="1" aria-sort="none" tabindex="-1">#</div>
-                    <div className="PlaylistTitle" role="columnheader" aria-colindex="2" aria-sort="none" tabindex="-1">
+                    <div className="PlaylistIndexSpacing" role="columnheader" aria-colindex="1" aria-sort="none" tabIndex="-1">#</div>
+                    <div className="PlaylistTitle" role="columnheader" aria-colindex="2" aria-sort="none" tabIndex="-1">
                       <div className="FlexCenter">
                         <span className="standalone-ellipsis-one-line">Title</span>
                       </div>
                     </div>
-                    <div className="GridWidthScaling" role="columnheader" aria-colindex="3" aria-sort="none" tabindex="-1">
+                    <div className="GridWidthScaling" role="columnheader" aria-colindex="3" aria-sort="none" tabIndex="-1">
                       <div className="FlexCenter">
                         <span className="standalone-ellipsis-one-line">Album</span>
                       </div>
                     </div>
-                    <div className="GridWidthScaling" role="columnheader" aria-colindex="4" aria-sort="none" tabindex="-1">
+                    <div className="GridWidthScaling" role="columnheader" aria-colindex="4" aria-sort="none" tabIndex="-1">
                       <div className="FlexCenter"><span className="standalone-ellipsis-one-line">Date added</span>
                       </div>
                     </div>
-                    <div className="FlexCenter" role="columnheader" aria-colindex="5" aria-sort="none" tabindex="-1">
+                    <div className="FlexCenter" role="columnheader" aria-colindex="5" aria-sort="none" tabIndex="-1">
                       <div aria-label="Duration" className="FlexCenter DurationSpacing" aria-expanded="false">
                         <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" className="durationClock">
                           <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
