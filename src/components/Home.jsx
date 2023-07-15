@@ -1,14 +1,12 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Authentication from "./Authentication";
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GetCurrUserPlaylists from "./GetCurrUserPlaylists";
 import getPlaylistData from "./helpers/getPlaylistData";
 import getPlaylistTracks from "./helpers/getPlaylistTracks";
 import GetCurrUser from "./helpers/getCurrUser";
 import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
-import deletePlaylistTracks from "./helpers/deletePlaylistTracks";
-import submitPlaylistTracks from "./helpers/submitPlaylistTracks";
 import shufflePlaylistInPlace from "./helpers/shufflePlaylistInPlace";
 import Track from "./Track";
 
