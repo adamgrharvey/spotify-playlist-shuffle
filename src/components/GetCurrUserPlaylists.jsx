@@ -1,37 +1,36 @@
 import axios from "axios";
 
-export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page, currUser) {
+export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, apiLink) {
 
-  let id = currUser.id;
-  /*
+  setUserPlaylists({
+    items: [],
+    next: null,
+    end: false
+  })
 
-    userState = {
-      access_token = ...
-      token_type: Bearer
-      expires_in: ...
-    }
+  let api = `https://api.spotify.com/v1/me/playlists`;
 
-  */
+  if (apiLink !== null) {
+    api = apiLink;
+  }
 
   return new Promise((resolve, reject) => {
-    axios.get(`https://api.spotify.com/v1/me/playlists${page}`, {
+    axios.get(api, {
       headers: {
         Authorization: `${userAuth.token_type} ${userAuth.access_token}`
       },
     })
       .then((res) => {
+
         let data = res.data;
-        for (let i = 0; i < data.items.length; i++) {
-          if (id !== data.items[i].owner.id) {
-            data.items.splice(i, 1);
-            i = -1;
-          }
-        }
-        data.total = data.items.length;
-        if (data.total < 21) {
-          data.next = null;
-        }
-        setUserPlaylists(data);
+        console.log(data);
+        setUserPlaylists((prev) => ({
+          ...prev,
+          items: [...prev.items, ...res.data.items],
+          next: res.data.next,
+          end: true
+        }));
+
         resolve(data);
       })
       .catch((err) => {
@@ -39,5 +38,4 @@ export default function GetCurrUserPlaylists(userAuth, setUserPlaylists, page, c
         reject(err);
       })
   })
-
 }

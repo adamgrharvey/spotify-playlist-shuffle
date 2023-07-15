@@ -8,6 +8,7 @@ import GetCurrUser from "./helpers/getCurrUser";
 import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
 import shufflePlaylistInPlace from "./helpers/shufflePlaylistInPlace";
+import removeNonUserPlaylists from "./helpers/removeNonUserPlaylists";
 import Track from "./Track";
 
 export default function Home(props) {
@@ -42,7 +43,11 @@ export default function Home(props) {
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
   const [currUser, setCurrUser] = useState({});
-  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [userPlaylists, setUserPlaylists] = useState({
+    items: [],
+    next: null,
+    end: false
+  });
   const [currPlaylist, setCurrPlaylist] = useState({
     data: {},
     tracks: [],
@@ -91,6 +96,18 @@ export default function Home(props) {
   }, [currPlaylist])
 
   useEffect(() => {
+    if (userPlaylists.next !== null) {
+      GetCurrUserPlaylists(userAuth, setUserPlaylists, userPlaylists.next)
+    }
+
+    if (userPlaylists.end) {
+      removeNonUserPlaylists(currUser.id, userPlaylists, setUserPlaylists);
+    }
+
+
+  }, [userPlaylists])
+
+  useEffect(() => {
     if (window.location.hash) {
       let userHash = window.location.hash.substring(1).split("&");
       setUserAuth({
@@ -112,7 +129,7 @@ export default function Home(props) {
       <div className="App">
         <h1>Spotify Playlist Scrambler</h1>
         {userAuth.access_token ? <button onClick={() => {
-          GetCurrUserPlaylists(userAuth, setUserPlaylists, "", currUser)
+          GetCurrUserPlaylists(userAuth, setUserPlaylists, null)
         }}>Get playlists</button> :
           <button onClick={handleLogin}>Login to Spotify</button>}
         <div>
@@ -123,7 +140,7 @@ export default function Home(props) {
             </div>}
         </div>
         {!currPlaylist.data.id ? <div className="list">
-          {!currPlaylist.data.id && userPlaylists.items && userPlaylists.items.map((playlist, i) =>
+          {!currPlaylist.data.id && !userPlaylists.end && userPlaylists.next == null && userPlaylists.items.map((playlist, i) =>
 
             <div className="playlistDiv" key={i}>
               {playlist.images[0] &&
@@ -149,7 +166,7 @@ export default function Home(props) {
 
             <div>{currPlaylist.data.name}</div>
 
-            
+
             <div className="contentSpacing">
               <div role="grid" aria-rowcount={`${currPlaylist.tracks.length + 1}`} aria-colcount={`${AriaCol}`} aria-label={`${currPlaylist.data.name}`} className="PlaylistGrid WidthToggle" tabIndex="0">
                 <div className="HeaderStyle" style={{ top: "64px" }} role="presentation">
