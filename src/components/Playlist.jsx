@@ -2,10 +2,32 @@ import '../CSS/Playlist.css';
 import '../CSS/Track.css';
 import countPlaylistDuration from './helpers/countPlaylistDuration';
 import Track from './Track';
+import { useState, useEffect } from 'react';
 
 export default function Playlist(props) {
+  const [AriaCol, setAriaCol] = useState(5);
 
-  let AriaCol = props.AriaCol;
+  const updateMedia = () => {
+    if (window.innerWidth < 840) {
+      setAriaCol(3);
+      return;
+    }
+    else if (window.innerWidth >= 840 && window.innerWidth < 1080) {
+      setAriaCol(4);
+      return;
+    }
+    else {
+      setAriaCol(5);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
+
   let currPlaylist = props.currPlaylist;
 
   return (

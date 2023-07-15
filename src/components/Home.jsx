@@ -14,29 +14,6 @@ import Playlist from "./Playlist";
 
 export default function Home(props) {
 
-
-  const [AriaCol, setAriaCol] = useState(5);
-
-  const updateMedia = () => {
-    if (window.innerWidth < 840) {
-      setAriaCol(3);
-      return;
-    }
-    else if (window.innerWidth >= 840 && window.innerWidth < 1080) {
-      setAriaCol(4);
-      return;
-    }
-    else {
-      setAriaCol(5);
-      return;
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  });
-
   const navigate = useNavigate();
 
   const [accessToken, setAccessToken] = useState(null);
@@ -165,7 +142,7 @@ export default function Home(props) {
             <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>shuffle</button>
             <button onClick={() => shufflePlaylistInPlace(userAuth, currPlaylist, setCurrPlaylist)}>save</button>
 
-            <Playlist currPlaylist={currPlaylist} AriaCol={AriaCol}/>
+            <Playlist currPlaylist={currPlaylist}/>
 
             
           </div>
