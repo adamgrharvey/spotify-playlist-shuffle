@@ -62,7 +62,7 @@ export default function Home(props) {
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // insert your client id here from spotify
   const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
+  const REDIRECT_URL_AFTER_LOGIN = "https://spotify-playlist-shuffle-teu7.vercel.app/";
   const SPACE_DELIMITER = "%20";
   const SCOPES = [
     "playlist-read-private",
