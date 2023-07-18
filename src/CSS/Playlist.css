@@ -42,6 +42,10 @@
   font-size: 12px;
 }
 
+.ArtistAlbumDateDurFont {
+  font-size: 14px;
+}
+
 @media(min-width: 840px) {
   .PlaylistTitleLarge-over11char {
     font-size: 1.8rem;
@@ -50,7 +54,7 @@
     font-size: 3.8rem;
   }
   .ArtistSpacing {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 

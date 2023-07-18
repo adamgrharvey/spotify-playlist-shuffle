@@ -36,18 +36,18 @@ export default function Track(props) {
           </div>
         </div>
         <div className="GridWidthScaling" role="gridcell" aria-colindex="3" tabIndex="-1">
-          <span className='standalone-ellipsis-one-line'>
+          <span className='standalone-ellipsis-one-line ArtistAlbumDateDurFont'>
             {track.track.album.name}
           </span>
 
         </div>
         <div className="GridWidthScaling" role="gridcell" aria-colindex="4" tabIndex="-1">
-          <span className=''>
+          <span className='ArtistAlbumDateDurFont'>
             {getTimeSince(dateAdded)}
           </span>
         </div>
         <div className="FlexCenter" role="gridcell" aria-colindex="5" tabIndex="-1">
-          <div className='DurationStyle'>
+          <div className='DurationStyle ArtistAlbumDateDurFont'>
             {msToMinutesAndSeconds(track.track.duration_ms)}
           </div>
         </div>
