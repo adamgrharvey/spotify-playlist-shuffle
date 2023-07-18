@@ -100,12 +100,12 @@ button:disabled {
 }
 
 .loginButton {
-  background-color: #1ED760;
-  color: #000;
+  background-color: #1ED760 !important;
+  color: #000 !important;
 }
 
 .loginButton:hover {
-  background-color: #20e967;
+  background-color: #20e967 !important;
 }
 
 ::-webkit-scrollbar {
