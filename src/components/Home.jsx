@@ -9,18 +9,43 @@ import shuffleTracks from "./helpers/shuffleTracks";
 import resetTracks from "./helpers/resetTracks";
 import shufflePlaylistInPlace from "./helpers/shufflePlaylistInPlace";
 import removeNonUserPlaylists from "./helpers/removeNonUserPlaylists";
+import useImageColor from 'use-image-color'
+import LoadingButton from '@mui/lab/LoadingButton';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Image } from "use-image-color";
 import Playlist from "./Playlist";
+
+export function ColorPalette(url) {
+
+  if (url === null) {
+    url = "https://i.scdn.co/image/ab67616d0000b2735c133c0318f05040ef9d16b5"
+  }
+
+  const { colors } = useImageColor(url, {
+    cors: true,
+    colors: 2,
+    format: 'rgb', // or 'rgb'
+    windowSize: 50
+  })
+  return colors;
+}
+
 
 
 export default function Home(props) {
-
   const navigate = useNavigate();
-
+  const [colorTarget, setColorTarget] = useState("https://i.scdn.co/image/ab67616d0000b2735c133c0318f05040ef9d16b5");
+  const colorPalette = ColorPalette(colorTarget);
+  const [RGB, setRGB] = useState([0, 0, 0]);
   const [accessToken, setAccessToken] = useState(null);
+  const [requestedPlaylists, setRequestedPlaylists] = useState(false);
   const [expiresIn, setExpiresIn] = useState(0);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [userAuth, setUserAuth] = useState({});
   const [currUser, setCurrUser] = useState({});
+  const [saveButtonTxt, setSaveButtonTxt] = useState("Save");
+  const [saving, setSaving] = useState(false);
+
   const [userPlaylists, setUserPlaylists] = useState({
     items: [],
     next: null,
@@ -64,6 +89,10 @@ export default function Home(props) {
     if (userAuth.access_token) {
       GetCurrUser(userAuth, setCurrUser);
     }
+    if (userAuth.access_token && !requestedPlaylists && !currPlaylist.data.id) {
+      setRequestedPlaylists(true);
+      GetCurrUserPlaylists(userAuth, setUserPlaylists, null);
+    }
   }, [userAuth])
 
   useEffect(() => {
@@ -72,6 +101,13 @@ export default function Home(props) {
     }
 
   }, [currPlaylist])
+
+  useEffect(() => {
+    // console.log(colorPalette[0]);
+
+  }, [colorPalette])
+
+
 
   useEffect(() => {
     if (userPlaylists.next !== null) {
@@ -105,49 +141,62 @@ export default function Home(props) {
   return (
     <>
       <div className="App">
-        <h1>Spotify Playlist Scrambler</h1>
-        {userAuth.access_token ? <button onClick={() => {
+        {colorPalette !== undefined ?
+          <div className="backgroundColorChanger" style={{ "background-color": `rgb(${colorPalette[0][0]}, ${colorPalette[0][1]}, ${colorPalette[0][2]})` }}>
+          </div>
+          :
+          <div className="backgroundColorChanger" style={{ "background-color": `rgb(0, 0, 0)` }}>
+          </div>}
+
+        <div className="appTitle">Spotify Playlist Scrambler</div>
+        {!userAuth.access_token ? <button className="loginButton" onClick={handleLogin}>Login to Spotify</button> : <></>}
+        {!currPlaylist.data.id && userAuth.access_token ? <button className="loadButton" onClick={() => {
           GetCurrUserPlaylists(userAuth, setUserPlaylists, null)
-        }}>Get playlists</button> :
-          <button onClick={handleLogin}>Login to Spotify</button>}
-        <div>
-          {!currPlaylist.data.id && userPlaylists.items &&
-            <div>
-              {userPlaylists.previous != null && <button onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.previous.split('?')[1])}>Previous</button>}
-              {userPlaylists.next != null && <button className="" onClick={() => GetCurrUserPlaylists(userAuth, setUserPlaylists, '?' + userPlaylists.next.split('?')[1])}>Next</button>}
-            </div>}
-        </div>
+        }}>Refresh Playlists</button> : <></>}
+
+        {!currPlaylist.data.id && userAuth.access_token && <div className="descText">Select a Playlist and start scrambling!</div>}
+
         {!currPlaylist.data.id ? <div className="list">
           {!currPlaylist.data.id && !userPlaylists.end && userPlaylists.next == null && userPlaylists.items.map((playlist, i) =>
 
-            <div className="playlistDiv" key={i}>
-              {playlist.images[0] &&
-                <img width={42} height={42} src={playlist.images[0].url} alt="image"></img>}
-              <div className="playlistText" >{playlist.name}</div>
-              <button className="playlistSelect" onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id, false) }}>Select</button>
+            <div className="playlistDiv"
+              onMouseOver={() => { setColorTarget(playlist.images[0].url); }}
+              onClick={() => { getPlaylistData(userAuth, setCurrPlaylist, playlist.id, false) }}
+              key={i}>
+              <div className="playlistImage">
+                {playlist.images[0] &&
+                  <img height={64} src={playlist.images[0].url} alt="image"></img>}
+              </div>
+              <div className="playlistText" >
+                <span>{playlist.name}</span>
+              </div>
             </div>)}
         </div> : <div>
-          <button onClick={() => {
+          <button className="backButton" onClick={() => {
             setCurrPlaylist({
               data: {},
               tracks: [],
               shuffleTracks: [],
               next: null,
               end: false
-
             });
-          }}>Back</button>
+          }}>Back to Playlists</button>
           <div>
-            <button onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>reset</button>
-            <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>shuffle</button>
-            <button onClick={() => shufflePlaylistInPlace(userAuth, currPlaylist, setCurrPlaylist)}>save</button>
+            {JSON.stringify(currPlaylist.tracks) == JSON.stringify(currPlaylist.shuffleTracks) ? <button disabled={true} onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Undo</button> : <button disabled={false} onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Undo</button>}
+            <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Shuffle</button>
+            {JSON.stringify(currPlaylist.tracks) == JSON.stringify(currPlaylist.shuffleTracks) ? <button disabled={true}>{saveButtonTxt}</button> : <LoadingButton loading={saving} loadingIndicator={<CircularProgress sx={{"position": "relative", "bottom": "15px"}} thickness={4} color="success" size={30} />} className="saveButton" disabled={false}
+              onClick={async () => {
+                setSaveButtonTxt('')
+                setSaving(true);
+                await shufflePlaylistInPlace(userAuth, currPlaylist, setCurrPlaylist);
+                setSaving(false);
+                setSaveButtonTxt('Save');
 
-            <Playlist currPlaylist={currPlaylist}/>
+              }}>{saveButtonTxt}</LoadingButton>}
 
-            
+            <Playlist currPlaylist={currPlaylist} />
           </div>
         </div>}
-
       </div>
     </>
   )

@@ -22,12 +22,90 @@
   -webkit-box-orient: vertical;
   display: -webkit-box;
   white-space: unset;
-  word-break: break-all
+  word-break: break-all;
 }
 
 html {
   scrollbar-color: hsla(0, 0%, 100%, .3) transparent;
   scrollbar-width: auto
+}
+
+button {
+  
+  box-sizing: border-box !important;
+  font-family: "CircularSpUIv3T-Black", Helvetica, Arial, sans-serif !important;
+  -webkit-tap-highlight-color: transparent !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+  font-weight: 200 !important;
+  height: 50px !important;
+  width: max-content !important;
+  border: 0px !important;
+  border-radius: 500px !important;
+  display: inline-block !important;
+  position: relative !important;
+  background-color: #ffffff12 !important;
+  color: white !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  touch-action: manipulation !important;
+  transition-duration: 33ms !important;
+  transition-property: background-color, border-color, color, box-shadow, filter, transform !important;
+  user-select: none !important;
+  vertical-align: middle !important;
+  transform: translate3d(0px, 0px, 0px) !important;
+  padding: 18px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  margin-right: 8px !important;
+  align-self: center !important;
+  text-outline: 1px black solid !important;
+}
+
+button:hover {
+  background-color: #424242 !important;
+  transition: background-color 150ms linear !important;
+  cursor: pointer !important;
+}
+
+button:disabled {
+  background-color: #353434 !important;
+  color: #6b6b6b !important;
+}
+
+.backButton {
+  margin-bottom: 10px !important;
+}
+
+.saveButton {
+  background-color: #1eb151 !important;
+}
+
+.saveButton:hover {
+  background-color: #23c75c !important;
+}
+
+.loadButton {
+  margin: 0px !important;
+  margin-bottom: 10px !important;
+}
+
+.descText {
+  font-size: 1.4rem;
+  font-family: "CircularSpUIv3T-Black", Helvetica, Arial, sans-serif;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  color: #fff;
+}
+
+.loginButton {
+  background-color: #1ED760;
+  color: #000;
+}
+
+.loginButton:hover {
+  background-color: #20e967;
 }
 
 ::-webkit-scrollbar {
@@ -48,8 +126,6 @@ input {
   color: #b3b3b3;
   text-transform: none
 }
-
-
 
 body {
   -webkit-box-orient: vertical;
@@ -130,12 +206,6 @@ body {
   display: none
 }
 
-
-@media(width <=1200px) {
-  .Wn5NpEuR1Qw99DelnfxX .GridSizing {
-    grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [var2] 4fr [last] minmax(120px, 4fr)
-  }
-}
 
 .PlaylistGrid.WidthToggle[aria-colcount="6"] .GridSizing {
   grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [var3] minmax(120px, 2fr) [last] minmax(120px, 1fr)
