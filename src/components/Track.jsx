@@ -50,34 +50,9 @@ export default function Track(props) {
           <div className='DurationStyle'>
             {msToMinutesAndSeconds(track.track.duration_ms)}
           </div>
-
-
         </div>
       </div>
     </div>
-
-
-  )
-
-
-  return (
-    <tr className='Track'>
-      <td className='LabelTrackNumber'>{`${index + 1}`}</td>
-      <td>
-        {track.track.album.images && <img width={42} height={42} src={track.track.album.images[0].url} alt="image"></img>}
-        <div className='TitleArtist'>
-          <span id='Title' className='standalone-ellipsis-one-line'>
-            {`${track.track.name}`}
-          </span>
-          <span>
-            {`${track.track.artists[0].name}`}
-          </span>
-        </div>
-      </td>
-      <td className='standalone-ellipsis-one-line'>{`${track.track.album.name}`}</td>
-      <td>{`${getTimeSince(dateAdded)}`}</td>
-      <td className='duration'>{`${msToMinutesAndSeconds(track.track.duration_ms)}`}</td>
-    </tr>
   )
 }
 

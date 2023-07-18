@@ -23,7 +23,7 @@
   position: absolute;
   -webkit-transition: background-color 1s ease;
   transition: background-color 1s ease;
-  width: 205%;
+  width: 100%;
   z-index: -1;
 }
 

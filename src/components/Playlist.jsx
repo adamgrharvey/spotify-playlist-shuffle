@@ -8,6 +8,7 @@ export default function Playlist(props) {
   const [AriaCol, setAriaCol] = useState(5);
 
   const updateMedia = () => {
+    console.log(window.innerWidth);
     if (window.innerWidth < 840) {
       setAriaCol(3);
       return;
@@ -22,10 +23,17 @@ export default function Playlist(props) {
     }
   };
 
+
   useEffect(() => {
     window.addEventListener("resize", updateMedia);
     return () => window.removeEventListener("resize", updateMedia);
   });
+
+
+  // gets window width on first page load to set Aria cols correctly.
+  useEffect(() => {
+    updateMedia();
+  }, [])
 
 
   let currPlaylist = props.currPlaylist;
