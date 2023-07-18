@@ -184,7 +184,7 @@ export default function Home(props) {
           <div>
             {JSON.stringify(currPlaylist.tracks) == JSON.stringify(currPlaylist.shuffleTracks) ? <button disabled={true} onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Undo</button> : <button disabled={false} onClick={() => resetTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Undo</button>}
             <button onClick={() => shuffleTracks(currPlaylist.shuffleTracks, setCurrPlaylist)}>Shuffle</button>
-            {JSON.stringify(currPlaylist.tracks) == JSON.stringify(currPlaylist.shuffleTracks) ? <button disabled={true}>{saveButtonTxt}</button> : <LoadingButton loading={saving} loadingIndicator={<CircularProgress sx={{"position": "relative", "bottom": "15px"}} thickness={4} color="success" size={30} />} className="saveButton" disabled={false}
+            {JSON.stringify(currPlaylist.tracks) == JSON.stringify(currPlaylist.shuffleTracks) ? <button disabled={true}>{saveButtonTxt}</button> : <LoadingButton loading={saving} loadingIndicator={<CircularProgress sx={{ "position": "relative", "bottom": "15px" }} thickness={4} color="success" size={30} />} className="saveButton" disabled={false}
               onClick={async () => {
                 setSaveButtonTxt('')
                 setSaving(true);
