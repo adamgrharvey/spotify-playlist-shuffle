@@ -65,16 +65,16 @@ export default function Playlist(props) {
               <div className="PlaylistIndexSpacing" role="columnheader" aria-colindex="1" aria-sort="none" tabIndex="-1">#</div>
               <div className="PlaylistTitle" role="columnheader" aria-colindex="2" aria-sort="none" tabIndex="-1">
                 <div className="FlexCenter">
-                  <span className="standalone-ellipsis-one-line">Title</span>
+                  <span className="standalone-ellipsis-one-line ArtistAlbumDateDurFont">Title</span>
                 </div>
               </div>
               <div className="GridWidthScaling" role="columnheader" aria-colindex="3" aria-sort="none" tabIndex="-1">
                 <div className="FlexCenter">
-                  <span className="standalone-ellipsis-one-line">Album</span>
+                  <span className="standalone-ellipsis-one-line ArtistAlbumDateDurFont">Album</span>
                 </div>
               </div>
               <div className="GridWidthScaling" role="columnheader" aria-colindex="4" aria-sort="none" tabIndex="-1">
-                <div className="FlexCenter"><span className="standalone-ellipsis-one-line">Date added</span>
+                <div className="FlexCenter"><span className="standalone-ellipsis-one-line ArtistAlbumDateDurFont">Date added</span>
                 </div>
               </div>
               <div className="FlexCenter" role="columnheader" aria-colindex="5" aria-sort="none" tabIndex="-1">
