@@ -148,7 +148,7 @@ export default function Home(props) {
           <div className="backgroundColorChanger" style={{ "background-color": `rgb(0, 0, 0)` }}>
           </div>}
 
-        <div className="appTitle">Spotify Playlist Scrambler</div>
+        <div className="appTitle">Spotify Playlist Shuffle</div>
         <a target="_blank" href="https://github.com/adamgrharvey"><div className="appSubTitle">by Adam Harvey</div></a>
         {!userAuth.access_token ? <button className="loginButton" onClick={handleLogin}>Login to Spotify</button> : <></>}
         {!currPlaylist.data.id && userAuth.access_token ? <button className="loadButton" onClick={() => {
