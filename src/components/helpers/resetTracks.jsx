@@ -1,11 +1,8 @@
-export default function shuffleTracks(tracks, setCurrPlaylist) {
-
-  let outTracks = [...tracks];
-
+export default function shuffleTracks(setCurrPlaylist) {
   setCurrPlaylist((prev) => ({
     ...prev,
-    shuffleTracks: prev.tracks
-  }));
-  
-  return;
+    shuffleTracks: prev.tracks,
+  }))
+
+  return
 }

@@ -1,4 +1,5 @@
 # Hosted app
+
 Check out the shuffling below!\
 https://spotify-playlist-shuffle.vercel.app/
 
@@ -12,6 +13,7 @@ Duplicate `.env.example` and remove the `.example` from the end of the name.
 In the `.env`, fill in the client ID and client secret strings found in the Spotify API dashboard.
 
 ## Install dependencies
+
 Run `npm install --force` to install dependencies, `--force` is required to solve a 'dependency issue' that doesn't cause real problems.
 
 ## Run the app

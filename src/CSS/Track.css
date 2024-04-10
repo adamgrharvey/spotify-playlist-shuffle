@@ -9,12 +9,11 @@
   fill: currentcolor;
 }
 
-
 .ellipsis-one-line,
 .standalone-ellipsis-one-line {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .standalone-ellipsis-one-line {
@@ -26,14 +25,13 @@
 }
 
 html {
-  scrollbar-color: hsla(0, 0%, 100%, .3) transparent;
-  scrollbar-width: auto
+  scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent;
+  scrollbar-width: auto;
 }
 
 button {
-  
   box-sizing: border-box !important;
-  font-family: "CircularSpUIv3T-Black", Helvetica, Arial, sans-serif !important;
+  font-family: 'CircularSpUIv3T-Black', Helvetica, Arial, sans-serif !important;
   -webkit-tap-highlight-color: transparent !important;
   font-size: 20px !important;
   line-height: 20px !important;
@@ -93,14 +91,14 @@ button:disabled {
 
 .descText {
   font-size: 1.4rem;
-  font-family: "CircularSpUIv3T-Black", Helvetica, Arial, sans-serif;
+  font-family: 'CircularSpUIv3T-Black', Helvetica, Arial, sans-serif;
   margin-top: 15px;
   margin-bottom: 0px;
   color: #fff;
 }
 
 .loginButton {
-  background-color: #1ED760 !important;
+  background-color: #1ed760 !important;
   color: #000 !important;
 }
 
@@ -113,18 +111,18 @@ button:disabled {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 100%, .3)
+  background-color: hsla(0, 0%, 100%, 0.3);
 }
 
 html {
   background-color: #121212;
-  height: 100%
+  height: 100%;
 }
 
 body,
 input {
   color: #b3b3b3;
-  text-transform: none
+  text-transform: none;
 }
 
 body {
@@ -141,9 +139,8 @@ body {
   min-height: 600px;
   min-width: 800px;
   scrollbar-width: none;
-  width: 100%
+  width: 100%;
 }
-
 
 .PlaylistGrid {
   border: 1px solid transparent;
@@ -153,81 +150,95 @@ body {
   margin-right: 25px;
 }
 
-
-.PlaylistGrid[aria-colcount="2"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [last] minmax(120px, 1fr)
+.PlaylistGrid[aria-colcount='2']:not(.WidthToggle) .GridSizing {
+  grid-template-columns: [first] 4fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid[aria-colcount="2"]:not(.WidthToggle) .GridWidthScaling {
-  display: none
+.PlaylistGrid[aria-colcount='2']:not(.WidthToggle) .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid[aria-colcount="3"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [last] minmax(120px, 1fr)
+.PlaylistGrid[aria-colcount='3']:not(.WidthToggle) .GridSizing {
+  grid-template-columns: [first] 4fr [var1] 2fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid[aria-colcount="3"]:not(.WidthToggle) .GridWidthScaling~.GridWidthScaling {
-  display: none
+.PlaylistGrid[aria-colcount='3']:not(.WidthToggle) .GridWidthScaling ~ .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid[aria-colcount="4"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [last] minmax(120px, 1fr)
+.PlaylistGrid[aria-colcount='4']:not(.WidthToggle) .GridSizing {
+  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid[aria-colcount="4"]:not(.WidthToggle) .GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
-  display: none
+.PlaylistGrid[aria-colcount='4']:not(.WidthToggle)
+  .GridWidthScaling
+  ~ .GridWidthScaling
+  ~ .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid[aria-colcount="5"]:not(.WidthToggle) .GridSizing {
-  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [var3] 2fr [last] minmax(120px, 1fr)
+.PlaylistGrid[aria-colcount='5']:not(.WidthToggle) .GridSizing {
+  grid-template-columns: [first] 4fr [var1] 2fr [var2] 2fr [var3] 2fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="3"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr)
+.PlaylistGrid.WidthToggle[aria-colcount='3'] .GridSizing {
+  grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="3"] .GridWidthScaling {
-  display: none
+.PlaylistGrid.WidthToggle[aria-colcount='3'] .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="4"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [last] minmax(120px, 1fr)
+.PlaylistGrid.WidthToggle[aria-colcount='4'] .GridSizing {
+  grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="4"] .GridWidthScaling~.GridWidthScaling {
-  display: none
+.PlaylistGrid.WidthToggle[aria-colcount='4'] .GridWidthScaling ~ .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="5"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px, 1fr)
+.PlaylistGrid.WidthToggle[aria-colcount='5'] .GridSizing {
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px, 1fr);
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="5"] .GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
-  display: none
+.PlaylistGrid.WidthToggle[aria-colcount='5']
+  .GridWidthScaling
+  ~ .GridWidthScaling
+  ~ .GridWidthScaling {
+  display: none;
 }
 
-
-.PlaylistGrid.WidthToggle[aria-colcount="6"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [var3] minmax(120px, 2fr) [last] minmax(120px, 1fr)
+.PlaylistGrid.WidthToggle[aria-colcount='6'] .GridSizing {
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [var3] minmax(120px, 2fr) [last] minmax(
+      120px,
+      1fr
+    );
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="6"] .GridWidthScaling~.GridWidthScaling~.GridWidthScaling~.GridWidthScaling {
-  display: none
+.PlaylistGrid.WidthToggle[aria-colcount='6']
+  .GridWidthScaling
+  ~ .GridWidthScaling
+  ~ .GridWidthScaling
+  ~ .GridWidthScaling {
+  display: none;
 }
 
-.PlaylistGrid.WidthToggle[aria-colcount="7"] .GridSizing {
-  grid-template-columns: [index] 16px [first] 6fr [var1] 3fr [var2] 3fr [var3] 2fr [var4] 2fr [last] minmax(120px, 1fr)
+.PlaylistGrid.WidthToggle[aria-colcount='7'] .GridSizing {
+  grid-template-columns: [index] 16px [first] 6fr [var1] 3fr [var2] 3fr [var3] 2fr [var4] 2fr [last] minmax(
+      120px,
+      1fr
+    );
 }
 
 .GridSizing {
   grid-gap: 16px;
   display: grid;
-  padding: 0 16px
+  padding: 0 16px;
 }
 
 .PlaylistTrackTitle {
   padding-bottom: 4px;
-  color: #fff
+  color: #fff;
 }
 
 .HeaderStyle {
@@ -239,30 +250,28 @@ body {
   padding: 0 16px;
   position: sticky;
   z-index: 2;
-  background-color: #121212
+  background-color: #121212;
 }
 
-@media(min-width: 1024px) {
+@media (min-width: 1024px) {
   .HeaderStyle {
     margin: 0 -24px 16px;
-    padding: 0 24px
+    padding: 0 24px;
   }
 }
 
 .PlaylistHeader {
-  border-bottom: 1px solid hsla(0, 0%, 100%, .1);
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
   color: #b3b3b3;
-  height: 36px
+  height: 36px;
 }
-
 
 .GridSpacing {
   border: 1px solid transparent;
   border-radius: 4px;
   height: 56px;
-  position: relative
+  position: relative;
 }
-
 
 .FlexCenter {
   -webkit-box-pack: center;
@@ -275,9 +284,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
-
 
 .PlaylistIndexSpacing {
   justify-self: end;
@@ -290,7 +298,7 @@ body {
   align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex
+  display: flex;
 }
 
 .PlaylistTitle {
@@ -305,9 +313,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   grid-column: last;
-  justify-self: end
+  justify-self: end;
 }
-
 
 .GridWidthScaling {
   -webkit-box-align: center;
@@ -316,17 +323,12 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-self: start
+  justify-self: start;
 }
-
-
-
-
-
 
 .GridWidthScaling a,
 .ArtistSpacing a {
-  color: #b3b3b3
+  color: #b3b3b3;
 }
 
 .DurationStyle {
@@ -337,9 +339,8 @@ body {
   display: flex;
   font-variant-numeric: tabular-nums;
   justify-content: flex-end;
-  width: 5ch
+  width: 5ch;
 }
-
 
 .PlaylistIndex {
   color: #b3b3b3;
@@ -348,5 +349,5 @@ body {
   min-height: 16px;
   min-width: 16px;
   position: relative;
-  width: 16px
+  width: 16px;
 }
