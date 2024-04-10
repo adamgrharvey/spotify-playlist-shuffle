@@ -8,9 +8,9 @@ https://spotify-playlist-shuffle.vercel.app/
 You can setup your own Spotify API access at this link:\
 https://developer.spotify.com/documentation/web-api
 
-Duplicate `.env.example` and remove the `.example` from the end of the name.
+Remove the `.example` from the end of the `.env.example`.
 
-In the `.env`, fill in the client ID and client secret strings found in the Spotify API dashboard.
+In that `.env`, replace in the client ID and client secret strings with ones found in your Spotify API dashboard.
 
 ## Install dependencies
 
